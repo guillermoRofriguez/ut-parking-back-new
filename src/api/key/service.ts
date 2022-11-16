@@ -1,5 +1,5 @@
 import { connect } from "../database/mongo";
-import { KeyGenerate } from "./model";
+import { KeyGenerate, Vehiculo } from "./model";
 
 
 async function insertNewKey(uid: any) {
@@ -39,8 +39,29 @@ async function cantidadDeClavesDiarias() {
     }
 }
 
+async function registerVehiculo(vehiculo:Vehiculo) {
+    try {
+          const {type, marca,modelo,placa}= vehiculo ;
+        const connection = await connect();
+        const dbResponse = await connection.collection('vehiculo');
+        let sent:Vehiculo = {
+            type: type,
+            marca: marca,
+            modelo:modelo,
+            placa: placa
+        }
+         await dbResponse.insertOne(sent)
+    } catch (error) {
+        console.log(error);
+        throw error
+        
+    }
+    
+}
+
 
 export{
     insertNewKey,
-    cantidadDeClavesDiarias
+    cantidadDeClavesDiarias,
+    registerVehiculo
 }

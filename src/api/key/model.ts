@@ -3,3 +3,12 @@ export interface KeyGenerate{
     uid:  any,
     create_at:any
 }
+
+export interface Vehiculo{
+    _id?: any,
+    type: string,
+    modelo: string,
+    marca:string,
+    placa:string,
+
+}

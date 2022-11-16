@@ -30,10 +30,27 @@ async function cantidadDeClavesDiariasController(req: express.Request, res: expr
         console.log(error);
         throw error
     }
-    
+}
+
+async function registerVehiculoController(req: express.Request, res: express.Response) {
+    try {
+        const vehiculo = req.body.vehiculo
+        console.log(vehiculo);
+        
+        const response = await service.registerVehiculo(vehiculo)
+        res.send({
+            code:200,
+            message: 'Se agrego el vehiculo',
+            data: response
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
 }
 
 export{
     insertNewKeyController,
-    cantidadDeClavesDiariasController
+    cantidadDeClavesDiariasController,
+    registerVehiculoController
 }
