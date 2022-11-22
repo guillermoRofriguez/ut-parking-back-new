@@ -21,8 +21,8 @@ async function createUser(data:any) {
 async function createRegularUser(form: UserRegular) {
     try {
         console.log("form",form);
-        
         let newUSer = {
+            uid: form.uid,
             name: form.name,
             matricula: form.matricula,
             email: form.email,
@@ -55,9 +55,27 @@ async function getAllUSers() {
     }
 }
 
+async function getUSerInfo(uid: string){
+    try {
+        const connection = await connect();
+        const dbRef = connection.collection('users');
+        if(uid == ''){
+            return 'No se encontro el usuario'
+        }
+        let response = await dbRef.findOne({uid : uid})
+        // console.log(response);
+        return response
+        
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
 export {
     createUser,
     createRegularUser,
-    getAllUSers
+    getAllUSers,
+    getUSerInfo
 }
 

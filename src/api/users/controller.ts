@@ -51,8 +51,26 @@ async function getAllUSersController(req: express.Request, res: express.Response
     }
 }
 
+async function getUSerInfoController(req: express.Request, res: express.Response) {
+    try {
+        const uid = req.body.uid
+        console.log(uid);
+        
+        const response = await service.getUSerInfo(uid)
+        res.send({
+            code:200, 
+            message:'El usuario se encontro',
+            data: response
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
 export {
     createUSerController,
     createRegularUSerController,
-    getAllUSersController
+    getAllUSersController,
+    getUSerInfoController
 }

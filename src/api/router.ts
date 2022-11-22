@@ -7,12 +7,16 @@ const router = express.Router()
 router.post('/create-user', UsersController.createUSerController);
 router.post('/create-regular-user', UsersController.createRegularUSerController);
 router.get('/all-users', UsersController.getAllUSersController);
+router.post('/user/info-user', UsersController.getUSerInfoController);
+
 
 
 //ESTACIONAMIENTO
 router.post('/estacionamiento/insert-new-key', SpaceController.insertNewKeyController);
 router.get('/estacionamiento/getall', SpaceController.cantidadDeClavesDiariasController);
-router.post('/register/vehiculo', SpaceController.registerVehiculoController)
+router.post('/register/vehiculo', SpaceController.registerVehiculoController);
+router.post('/key/clave-send', SpaceController.getClaveWhitIdController);
+router.post('/key/inser-user', SpaceController.insertUSerController);
 export { router };
 
 

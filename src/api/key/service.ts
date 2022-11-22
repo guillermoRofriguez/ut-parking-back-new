@@ -56,12 +56,46 @@ async function registerVehiculo(vehiculo:Vehiculo) {
         throw error
         
     }
-    
+}
+async function getClaveWhitId(uid:string){
+    try {
+        const connection = await connect();
+        const dbRef = connection.collection('estacionamiento');
+        if(uid == ''){
+            return 'No se encontro nada'
+        }
+        const response = await dbRef.findOne({uid: uid})
+        return response
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+async function insertUSer(uid:string, infoUSer:any){
+    try {
+        const connection = await connect();
+        const dbRef = connection.collection('estacionamiento');
+        const insert = dbRef.updateOne(
+            {uid:uid},
+            {$set:{
+                infoUSer: infoUSer,
+                disponible: true,
+                register: new Date()
+            }}
+        );
+        return insert
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
 }
 
 
 export{
     insertNewKey,
     cantidadDeClavesDiarias,
-    registerVehiculo
+    registerVehiculo,
+    getClaveWhitId,
+    insertUSer
 }
