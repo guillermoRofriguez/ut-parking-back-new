@@ -82,10 +82,27 @@ async function insertUSerController(req: express.Request, res: express.Response)
     }
 }
 
+async function insertClaveToUserController(req: express.Request, res: express.Response) {
+    try {
+        const clave = req.body.clave;
+        const uid = req.body.uid
+        const response = await service.insertClaveToUser(uid,clave);
+        res.send({
+            code:200,
+            message: 'Se agrego una clave al usuario',
+            data: response
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }   
+}
+
 export{
     insertNewKeyController,
     cantidadDeClavesDiariasController,
     registerVehiculoController,
     getClaveWhitIdController,
-    insertUSerController
+    insertUSerController,
+    insertClaveToUserController
 }

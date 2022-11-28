@@ -17,6 +17,7 @@ router.get('/estacionamiento/getall', SpaceController.cantidadDeClavesDiariasCon
 router.post('/register/vehiculo', SpaceController.registerVehiculoController);
 router.post('/key/clave-send', SpaceController.getClaveWhitIdController);
 router.post('/key/inser-user', SpaceController.insertUSerController);
+router.post('/key/inser-clave-to-user', SpaceController.insertClaveToUserController);
 export { router };
 
 

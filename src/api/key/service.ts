@@ -92,10 +92,29 @@ async function insertUSer(uid:string, infoUSer:any){
 }
 
 
+async function insertClaveToUser(uid:string,clave:string) {
+    try {
+        const connection = await connect();
+        const dbRef = connection.collection('users')
+        let response = await dbRef.updateOne(
+            {uid:uid},
+            {$set:{
+                clave : clave,
+                claveActive: true
+            }}
+            )
+            return response
+    } catch (error) {
+        console.log(error);
+        throw error
+    }    
+}
+
 export{
     insertNewKey,
     cantidadDeClavesDiarias,
     registerVehiculo,
     getClaveWhitId,
-    insertUSer
+    insertUSer,
+    insertClaveToUser
 }
