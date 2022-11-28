@@ -81,7 +81,7 @@ async function insertUSer(uid:string, infoUSer:any){
             {uid:uid},
             {$set:{
                 infoUSer: infoUSer,
-                disponible: true,
+                disponible: false,
                 register: new Date()
             }}
         );
