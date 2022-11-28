@@ -135,8 +135,10 @@ async function liberarSpacio(uid:string) {
 async function getVehiculoUser(uid:string) {
     try {
         const connectiion = await connect()
-        const dbRef= connectiion.collection('estacionamiento')
+        const dbRef= connectiion.collection('vehiculo')
         let response = await dbRef.find({uid:uid}).toArray()
+        console.log(response);
+        
         return response
     } catch (error) {
         console.log(error);

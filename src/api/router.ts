@@ -19,6 +19,7 @@ router.post('/key/clave-send', SpaceController.getClaveWhitIdController);
 router.post('/key/inser-user', SpaceController.insertUSerController);
 router.post('/key/get-clave-id-user', SpaceController.getClaveToUSerController);
 router.post('/key/liberar-estacionameinto', SpaceController.liberarSpacioController);
+router.post('/key/veiculos-user', SpaceController.allVehiculosUserController);
 export { router };
 
 

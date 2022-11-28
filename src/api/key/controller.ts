@@ -113,8 +113,25 @@ async function liberarSpacioController(req: express.Request, res: express.Respon
         throw error
     }
 }
+async function allVehiculosUserController(req: express.Request, res: express.Response) {
+    try {
+        const uid = req.body.uid
+        console.log(uid);
+        
+        const response = await service.getVehiculoUser(uid)
+        res.send({
+            code:200,
+            message:"Vehiculos del usuario",
+            data: response
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
 
 export{
+    allVehiculosUserController,
     insertNewKeyController,
     cantidadDeClavesDiariasController,
     registerVehiculoController,
