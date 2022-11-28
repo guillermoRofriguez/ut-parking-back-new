@@ -6,6 +6,7 @@ export interface KeyGenerate{
 
 export interface Vehiculo{
     _id?: any,
+    uid:string
     type: string,
     modelo: string,
     marca:string,

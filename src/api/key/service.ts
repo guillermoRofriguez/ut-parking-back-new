@@ -39,12 +39,13 @@ async function cantidadDeClavesDiarias() {
     }
 }
 
-async function registerVehiculo(vehiculo:Vehiculo) {
+async function registerVehiculo(uid: string ,vehiculo:Vehiculo) {
     try {
           const {type, marca,modelo,placa}= vehiculo ;
         const connection = await connect();
         const dbResponse = await connection.collection('vehiculo');
         let sent:Vehiculo = {
+            uid: uid,
             type: type,
             marca: marca,
             modelo:modelo,
@@ -91,11 +92,66 @@ async function insertUSer(uid:string, infoUSer:any){
     }
 }
 
+async function getClaveToUSerId(uid:string) {
+    try {
+        const connectiion = await connect()
+        const dbRef= connectiion.collection('estacionamiento')
+        let res = await dbRef.find({'infoUSer.uid': uid}).toArray()
+        // console.log(res);
+        
+        return res
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+async function liberarSpacio(uid:string) {
+    try {
+        const infoClave:any = await getClaveWhitId(uid)
+        const connectiion = await connect()
+        const dbRef= connectiion.collection('estacionamiento')
+        console.log('info',infoClave);
+        
+        await dbRef.updateOne(
+            {uid: uid},
+            {
+                $set:{
+                    disponible:true,
+                },
+                $unset:{
+                    infoUSer: "",
+                    register: ""
+                }
+                
+            }
+            )
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+async function getVehiculoUser(uid:string) {
+    try {
+        const connectiion = await connect()
+        const dbRef= connectiion.collection('estacionamiento')
+        let response = await dbRef.find({uid:uid}).toArray()
+        return response
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
 
 export{
     insertNewKey,
     cantidadDeClavesDiarias,
     registerVehiculo,
     getClaveWhitId,
+    getClaveToUSerId,
+    getVehiculoUser,
+    liberarSpacio,
     insertUSer
 }

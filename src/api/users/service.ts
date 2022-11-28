@@ -46,7 +46,7 @@ async function getAllUSers() {
         const conn = await connect();
         const dbCollection = await conn.collection("users");
         let newArray = await(await dbCollection.find()).toArray()
-        console.log(newArray);
+        // console.log(newArray);
         
         return newArray
     } catch (error) {

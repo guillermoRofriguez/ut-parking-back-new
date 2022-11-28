@@ -4,7 +4,7 @@ import express, { response } from "express";
 async function createUSerController(req: express.Request, res: express.Response) {
     try {
         let response = req.body || null
-        console.log(response);
+        // console.log(response);
         
         const data = await service.createUser(response)
         res.send({
@@ -54,7 +54,7 @@ async function getAllUSersController(req: express.Request, res: express.Response
 async function getUSerInfoController(req: express.Request, res: express.Response) {
     try {
         const uid = req.body.uid
-        console.log(uid);
+        // console.log(uid);
         
         const response = await service.getUSerInfo(uid)
         res.send({

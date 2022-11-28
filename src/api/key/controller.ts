@@ -35,9 +35,10 @@ async function cantidadDeClavesDiariasController(req: express.Request, res: expr
 async function registerVehiculoController(req: express.Request, res: express.Response) {
     try {
         const vehiculo = req.body.vehiculo
+        const uid = req.body.uid
         console.log(vehiculo);
         
-        const response = await service.registerVehiculo(vehiculo)
+        const response = await service.registerVehiculo(uid,vehiculo)
         res.send({
             code:200,
             message: 'Se agrego el vehiculo',
@@ -82,10 +83,43 @@ async function insertUSerController(req: express.Request, res: express.Response)
     }
 }
 
+async function getClaveToUSerController(req: express.Request, res: express.Response) {
+    try {
+        const uid = req.body.uid;
+        // console.log(uid);
+        
+        const response = await service.getClaveToUSerId(uid);
+        res.send({
+            code: 200, 
+            message:"Este es la clave",
+            data: response
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+async function liberarSpacioController(req: express.Request, res: express.Response) {
+    try {
+        const uid = req.body.uid;
+        const response = await service.liberarSpacio(uid);
+        res.send({
+            conde: 200,
+            message: "Se libero el espacio",
+            data: response
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
 export{
     insertNewKeyController,
     cantidadDeClavesDiariasController,
     registerVehiculoController,
     getClaveWhitIdController,
+    getClaveToUSerController,
+    liberarSpacioController,
     insertUSerController
 }
